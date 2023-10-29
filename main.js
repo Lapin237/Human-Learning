@@ -124,6 +124,19 @@
                     customClasses.push(splitTag.val);
                 }
 
+                // DARK: on, off, toggle
+                else if( splitTag && splitTag.property == "DARK" ) {
+                    if( splitTag.val == "off" ) {
+                        document.body.classList.remove("dark");
+                    }
+                    else if( splitTag.val == "on" ) {
+                        document.body.classList.add("dark");
+                    }
+                    else if( splitTag.val == "off" ) {
+                        document.body.classList.toggle("dark");
+                    }
+                }
+
                 // CLEAR - removes all existing content.
                 // RESTART - clears everything and restarts the story from the beginning
                 else if( tag == "CLEAR" || tag == "RESTART" ) {
@@ -131,7 +144,7 @@
                     removeAll("img");
 
                     // Comment out this line if you want to leave the header visible when clearing
-                    setVisible(".header", false);
+                    // setVisible(".header", false);
 
                     if( tag == "RESTART" ) {
                         restart();
