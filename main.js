@@ -138,9 +138,13 @@
                 }
 
                 // SAVE
-                else if ( tag == "SAVE" ) {
+                else if ( tag == "SAVE" || ( splitTag && splitTag.property == "SAVE" ) ) {
                     try {
-                        window.localStorage.setItem('save-state', savePoint);
+                        let theSavePoint = savePoint;
+                        if (splitTag && splitTag.val == "dark") {
+                            theSavePoint = theSavePoint.replace('"variablesState":{', '"variablesState":{"autosave_in_dark": true, ');
+                        }
+                        window.localStorage.setItem('save-state', theSavePoint);
                         document.getElementById("reload").removeAttribute("disabled");
                         window.localStorage.setItem('theme', document.body.classList.contains("dark") ? "dark" : "");
                     } catch (e) {
