@@ -142,7 +142,9 @@
                     try {
                         let theSavePoint = savePoint;
                         if (splitTag && splitTag.val == "dark") {
-                            theSavePoint = theSavePoint.replace('"variablesState":{', '"variablesState":{"autosave_in_dark": true, ');
+                            theSavePoint = theSavePoint.replace('"variablesState":{', '"variablesState":{"autosave_in_dark":true,');
+                            theSavePoint = theSavePoint.replace('"autosave_in_dark":false,', '');
+                            theSavePoint = theSavePoint.replace(',"autosave_in_dark":false}', '}');
                         }
                         window.localStorage.setItem('save-state', theSavePoint);
                         document.getElementById("reload").removeAttribute("disabled");
@@ -375,7 +377,9 @@
                     restart();
                 } else if (response == "Gauss") {
                     let theSavePoint = savePoint;
-                    theSavePoint = theSavePoint.replace('"variablesState":{', '"variablesState":{"god_mode": true, ');
+                    theSavePoint = theSavePoint.replace('"variablesState":{', '"variablesState":{"god_mode":true,');
+                    theSavePoint = theSavePoint.replace('"god_mode":false,', '');
+                    theSavePoint = theSavePoint.replace(',"god_mode":false}', '}');
                     window.localStorage.setItem('save-state', theSavePoint);
                     document.getElementById("reload").removeAttribute("disabled");
                     window.localStorage.setItem('theme', document.body.classList.contains("dark") ? "dark" : "");
