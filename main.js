@@ -375,7 +375,7 @@
                     restart();
                 } else if (response == "Gauss") {
                     let theSavePoint = savePoint;
-                    theSavePoint.replace('"variablesState":{', '"variablesState":{"god_mode": true, ');
+                    theSavePoint = theSavePoint.replace('"variablesState":{', '"variablesState":{"god_mode": true, ');
                     window.localStorage.setItem('save-state', theSavePoint);
                     document.getElementById("reload").removeAttribute("disabled");
                     window.localStorage.setItem('theme', document.body.classList.contains("dark") ? "dark" : "");
