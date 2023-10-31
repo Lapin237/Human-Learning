@@ -137,6 +137,17 @@
                     }
                 }
 
+                // SAVE
+                else if ( tag == "SAVE" ) {
+                    try {
+                        window.localStorage.setItem('save-state', savePoint);
+                        document.getElementById("reload").removeAttribute("disabled");
+                        window.localStorage.setItem('theme', document.body.classList.contains("dark") ? "dark" : "");
+                    } catch (e) {
+                        console.warn("Couldn't save state");
+                    }
+                }
+
                 // CLEAR - removes all existing content.
                 // RESTART - clears everything and restarts the story from the beginning
                 else if( tag == "CLEAR" || tag == "RESTART" ) {
