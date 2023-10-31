@@ -363,10 +363,34 @@
 
         let rewindEl = document.getElementById("rewind");
         if (rewindEl) rewindEl.addEventListener("click", function(event) {
-            removeAll("p");
-            removeAll("img");
-            setVisible(".header", false);
-            restart();
+            if (document.body.classList.contains("dark")){
+                alert("这里没有回头路——这命运连「重置游戏」也无法挽救。");
+            } else {
+                let response = "";
+                response = window.prompt("重置游戏进度。\n注意：在进入「选择谜题」界面时，现有存档即会被覆盖。请三思后行。\n输入「晚来天欲雪」的下一句以示确定，仅包括汉字。","");
+                if (response == "能饮一杯无") {
+                    removeAll("p");
+                    removeAll("img");
+                    setVisible(".header", false);
+                    restart();
+                } else if (response == "Gauss") {
+                    let theSavePoint = savePoint;
+                    theSavePoint.replace('"variablesState":{', '"variablesState":{"god_mode": true, ');
+                    window.localStorage.setItem('save-state', theSavePoint);
+                    document.getElementById("reload").removeAttribute("disabled");
+                    window.localStorage.setItem('theme', document.body.classList.contains("dark") ? "dark" : "");
+                    removeAll("p");
+                    removeAll("img");
+                    try {
+                        let savedState = window.localStorage.getItem('save-state');
+                        if (savedState) story.state.LoadJson(savedState);
+                    } catch (e) {
+                        console.debug("Couldn't load save state");
+                    }
+                    continueStory(true);
+                }
+            }
+
         });
 
         let saveEl = document.getElementById("save");
