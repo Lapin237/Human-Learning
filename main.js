@@ -4,6 +4,12 @@
     var story = new inkjs.Story(storyContent);
 
     var savePoint = "";
+    
+    // delay = next_delay(delay)
+    function next_delay(d) {
+        return 150.0 + 0.96 * d;
+
+    }
 
     let savedTheme;
     let globalTagTheme;
@@ -101,7 +107,7 @@
                     storyContainer.appendChild(imageElement);
 
                     showAfter(delay, imageElement);
-                    delay += 200.0;
+                    delay = next_delay(delay);
                 }
 
                 // LINK: url
@@ -138,20 +144,26 @@
                 }
 
                 // SAVE
-                else if ( tag == "SAVE" || ( splitTag && splitTag.property == "SAVE" ) ) {
+                else if ( tag == "SAVE" ) {
                     try {
-                        let theSavePoint = savePoint;
-                        if (splitTag && splitTag.val == "dark") {
-                            theSavePoint = theSavePoint.replace('"variablesState":{', '"variablesState":{"autosave_in_dark":true,');
-                            theSavePoint = theSavePoint.replace('"autosave_in_dark":false,', '');
-                            theSavePoint = theSavePoint.replace(',"autosave_in_dark":false}', '}');
-                        }
-                        window.localStorage.setItem('save-state', theSavePoint);
+                        window.localStorage.setItem('save-state', savePoint);
                         document.getElementById("reload").removeAttribute("disabled");
                         window.localStorage.setItem('theme', document.body.classList.contains("dark") ? "dark" : "");
                     } catch (e) {
                         console.warn("Couldn't save state");
                     }
+                }
+
+                // METARAND 
+                else if ( tag == "METARAND" ) {
+                    let result = '';
+                    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+                    let counter = 0;
+                    while (counter < 6) {
+                        result += characters.charAt(Math.floor(Math.random() * characters.length));
+                        counter += 1;
+                    }
+                    story.state.variablesState["meta_rand"] = result;
                 }
 
                 // CLEAR - removes all existing content.
@@ -181,7 +193,7 @@
 
             // Fade in paragraph after a short delay
             showAfter(delay, paragraphElement);
-            delay += 200.0;
+            delay = next_delay(delay);
         }
 
         // Create HTML choices from ink choices
@@ -195,7 +207,7 @@
 
             // Fade choice in after a short delay
             showAfter(delay, choiceParagraphElement);
-            delay += 200.0;
+            delay = next_delay(delay);
 
             // Click on choice
             var choiceAnchorEl = choiceParagraphElement.querySelectorAll("a")[0];
@@ -365,40 +377,32 @@
 
         let rewindEl = document.getElementById("rewind");
         if (rewindEl) rewindEl.addEventListener("click", function(event) {
-            if (document.body.classList.contains("dark")){
-                alert("这里没有回头路——这命运连「重置游戏」也无法挽救。");
-            } else {
-                let response = "";
-                response = window.prompt("重置游戏进度。\n注意：在进入「选择谜题」界面时，现有存档即会被覆盖。请三思后行。\n输入「晚来天欲雪」的下一句以示确定，仅包括汉字。","");
-                if (response == "能饮一杯无") {
+            
+            let response = "";
+            response = window.prompt("彻底重置游戏。保存的进度也将被删除。请三思后行！\n输入「晚来天欲雪」的下一句以示确定，仅包括汉字。","");
+            if (response == "能饮一杯无" || response == "Newton") {
+                if (document.body.classList.contains("dark") && response == "能饮一杯无") { 
+                    alert("这里没有回头路——这命运连「重置游戏」也无法挽救。");
+                } else {
                     removeAll("p");
                     removeAll("img");
                     setVisible(".header", false);
                     restart();
-                } else if (response == "Gauss") {
-                    let theSavePoint = savePoint;
-                    theSavePoint = theSavePoint.replace('"variablesState":{', '"variablesState":{"god_mode":true,');
-                    theSavePoint = theSavePoint.replace('"god_mode":false,', '');
-                    theSavePoint = theSavePoint.replace(',"god_mode":false}', '}');
-                    window.localStorage.setItem('save-state', theSavePoint);
-                    document.getElementById("reload").removeAttribute("disabled");
-                    window.localStorage.setItem('theme', document.body.classList.contains("dark") ? "dark" : "");
-                    removeAll("p");
-                    removeAll("img");
-                    try {
-                        let savedState = window.localStorage.getItem('save-state');
-                        if (savedState) story.state.LoadJson(savedState);
-                    } catch (e) {
-                        console.debug("Couldn't load save state");
-                    }
-                    continueStory(true);
+                    document.getElementById("reload").setAttribute("disabled", "disabled");
+                    window.localStorage.setItem('save-state', "");
                 }
-            }
+            } else if (response == "Gauss") {
+                story.variablesState["god_mode"] = true;
+            } 
 
         });
 
         let saveEl = document.getElementById("save");
         if (saveEl) saveEl.addEventListener("click", function(event) {
+            if (document.body.classList.contains("dark")) { 
+                alert("这里没有回头路——这命运连「保存进度」也无法回避。");
+                return;
+            } 
             try {
                 window.localStorage.setItem('save-state', savePoint);
                 document.getElementById("reload").removeAttribute("disabled");
@@ -416,7 +420,10 @@
         reloadEl.addEventListener("click", function(event) {
             if (reloadEl.getAttribute("disabled"))
                 return;
-
+            if (document.body.classList.contains("dark")) { 
+                alert("这里没有回头路——这命运连「加载进度」也无法逃脱。");
+                return;
+            } 
             removeAll("p");
             removeAll("img");
             try {
@@ -433,6 +440,51 @@
             document.body.classList.add("switched");
             document.body.classList.toggle("dark");
         });
+
+        let exportEl = document.getElementById("exportButton");
+        if (exportEl) exportEl.addEventListener("click", function(event) {
+            let savedState = window.localStorage.getItem('save-state');
+            if (!savedState) {
+                alert("暂无存档，请先存储进度再导出。");
+                return;
+            }
+            let save64 = toBinary("Start_Of_Save" + savedState + "End_Of_Save");
+            navigator.clipboard.writeText(save64);    
+            alert("存档已复制到剪贴板。");   
+        });
+
+        let importEl = document.getElementById("import");
+        if (importEl) importEl.addEventListener("click", function(event) {
+            if (document.body.classList.contains("dark")) { 
+                alert("这里没有回头路——这命运连「导入存档」也无法赦免。");
+                return;
+            } 
+
+            let response = "";
+            response = prompt("输入要加载的存档","");
+            if (response.length <= 3) return;
+            let response_decode = fromBinary(response);
+            if (response_decode.startsWith("Start_Of_Save") && response_decode.endsWith("End_Of_Save")) {
+                let save = response_decode.slice(13, -11);
+                try {
+                    story.state.LoadJson(save);
+                } catch (e) {
+                    console.debug("Couldn't load save state");
+                }
+                continueStory(true);
+            } else {
+                alert("存档无效，可能不完整或已损坏。");  
+            }
+        });
+    }
+
+
+    // base64编码
+    function toBinary(string) {
+        return btoa(encodeURIComponent(string));
+    }
+    function fromBinary(encoded) {
+        return decodeURIComponent(atob(encoded));
     }
 
 })(storyContent);

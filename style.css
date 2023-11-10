@@ -266,3 +266,52 @@ body.dark {
 .dark #controls {
     background: black;
 }
+
+/*
+从这里开始是自己写的
+*/
+
+.classA {
+    color: #C00;
+    font-weight:bold;
+}
+.classB {
+    color: #00C;
+    font-weight:bold;
+}
+.classC {
+    color: #0C0;
+    font-weight:bold;
+}
+.word {
+    color: #C0C;
+    font-weight:bold;
+}
+.title {
+    text-align:center;
+    font-weight:bold;
+    font-size:144%;
+}
+
+.dark .title {
+    text-align:center;
+    font-weight:bold;
+    font-size:144%;
+}
+
+.dark .classA {
+    color: #F33;
+    font-weight:bold;
+}
+.dark .classB {
+    color: #33F;
+    font-weight:bold;
+}
+.dark .classC {
+    color: #3F3;
+    font-weight:bold;
+}
+.dark .word {
+    color: #F3F;
+    font-weight:bold;
+}
