@@ -166,6 +166,11 @@
                     story.state.variablesState["meta_rand"] = result;
                 }
 
+                // METAKEY
+                else if ( tag == "METAKEY" ) {
+                    story.state.variablesState["meta_key"] = decodeURI('%E4%BD%A0%E8%B5%A2%E4%BA%86%EF%BC%81%E6%9C%89%E7%89%B9%E6%AE%8A%E6%80%A7%E8%B4%A8%E7%9A%84%E4%B8%80%E7%B1%BB%E6%98%AF%E7%94%B2%E7%B1%BB%E7%9A%84%E8%B0%9C%E9%A2%98%E6%98%AF%3Cspan%20class=%22classA%22%3E%E7%94%B2%E7%B1%BB%3C/span%3E%EF%BC%8C%E6%9C%89%E7%89%B9%E6%AE%8A%E6%80%A7%E8%B4%A8%E7%9A%84%E4%B8%80%E7%B1%BB%E6%98%AF%E4%B9%99%E7%B1%BB%E7%9A%84%E8%B0%9C%E9%A2%98%E6%98%AF%3Cspan%20class=%22classB%22%3E%E4%B9%99%E7%B1%BB%3C/span%3E%E3%80%82');
+                }
+
                 // CLEAR - removes all existing content.
                 // RESTART - clears everything and restarts the story from the beginning
                 else if( tag == "CLEAR" || tag == "RESTART" ) {
