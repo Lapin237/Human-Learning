@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=Noto+Serif+SC:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+Sinhala:wght@400;700&family=Noto+Sans:wght@400;700&family=Noto+Serif&family=Noto+Serif+SC:wght@900&display=swap');
 
 body {
-    font-family: 'Noto Sans SC', sans-serif;
+    font-family:'Noto Sans SC', 'Noto Sans' , 'Noto Sans Sinhala', sans-serif;
     font-weight: normal;
     background: white;
     overflow: hidden;
@@ -27,9 +27,8 @@ h1 {
 
 h2 {
     font-size: 13pt;
-    font-family: 'Noto Sans SC', sans-serif;
-    font-weight: normal;
-    color: #444;
+    font-family: 'Noto Serif', serif;
+    font-weight: 400;
 }
 
 .header {
@@ -48,7 +47,7 @@ h2 {
 .written-in-ink {
     z-index: 3;
     font-size: 9pt;
-    font-family: 'Noto Sans SC', sans-serif;
+    font-family:'Noto Sans SC', 'Noto Sans' , 'Noto Sans Sinhala', sans-serif;
     text-align: center;
     font-weight: 700;
     position: fixed;
@@ -114,7 +113,7 @@ p {
 a {
     font-weight: 700;
     color: #b97c2c;
-    font-family: 'Noto Sans SC', sans-serif;
+    font-family:'Noto Sans SC', 'Noto Sans' , 'Noto Sans Sinhala', sans-serif;
     transition: color 0.6s;
     text-decoration: none;
 }
