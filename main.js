@@ -138,7 +138,7 @@
                     else if( splitTag.val == "on" ) {
                         document.body.classList.add("dark");
                     }
-                    else if( splitTag.val == "off" ) {
+                    else if( splitTag.val == "toggle" ) {
                         document.body.classList.toggle("dark");
                     }
                 }
@@ -385,7 +385,8 @@
             
             let response = "";
             response = window.prompt("彻底重置游戏。保存的进度也将被删除。请三思后行！\n输入「晚来天欲雪」的下一句以示确定，仅包括汉字。","");
-            if (response == "能饮一杯无" || response == "Newton") {
+            response = response.toUpperCase();
+            if (response == "能饮一杯无" || response == "NEWTON") {
                 if (document.body.classList.contains("dark") && response == "能饮一杯无") { 
                     alert("这里没有回头路——这命运连「重置游戏」也无法挽救。");
                 } else {
@@ -396,9 +397,11 @@
                     document.getElementById("reload").setAttribute("disabled", "disabled");
                     window.localStorage.setItem('save-state', "");
                 }
-            } else if (response == "Gauss") {
+            } else if (response == "GAUSS") {
                 story.variablesState["god_mode"] = true;
-            } 
+            } else if (response == "CAT") {
+                story.variablesState["count"] = 9;
+            }
 
         });
 

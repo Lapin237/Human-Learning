@@ -1,5 +1,5 @@
 body {
-    font-family:'Noto Sans SC', 'Noto Sans' , 'Noto Sans Sinhala', sans-serif;
+    font-family:'Noto Sans', 'Noto Sans SC', 'Noto Sans Sinhala', sans-serif;
     font-weight: normal;
     background: white;
     overflow: hidden;
@@ -45,7 +45,7 @@ h2 {
 .written-in-ink {
     z-index: 3;
     font-size: 9pt;
-    font-family:'Noto Sans SC', 'Noto Sans' , 'Noto Sans Sinhala', sans-serif;
+    font-family:'Noto Sans', 'Noto Sans SC', 'Noto Sans Sinhala', sans-serif;
     text-align: center;
     font-weight: 700;
     position: fixed;
@@ -111,7 +111,7 @@ p {
 a {
     font-weight: 700;
     color: #b97c2c;
-    font-family:'Noto Sans SC', 'Noto Sans' , 'Noto Sans Sinhala', sans-serif;
+    font-family:'Noto Sans', 'Noto Sans SC', 'Noto Sans Sinhala', sans-serif;
     transition: color 0.6s;
     text-decoration: none;
 }
