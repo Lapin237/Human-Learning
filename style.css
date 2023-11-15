@@ -1,3 +1,69 @@
+/* noto-sans-sc-regular - chinese-simplified */
+@font-face {
+    font-display: swap; 
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/noto-sans-sc-v36-chinese-simplified-regular.woff2') format('woff2'); 
+  }
+  /* noto-sans-sc-700 - chinese-simplified */
+  @font-face {
+    font-display: swap; 
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/noto-sans-sc-v36-chinese-simplified-700.woff2') format('woff2'); 
+  }
+
+/* noto-sans-sinhala-regular - sinhala */
+@font-face {
+    font-display: swap; 
+    font-family: 'Noto Sans Sinhala';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/noto-sans-sinhala-v26-sinhala-regular.woff2') format('woff2'); 
+  }
+  /* noto-sans-sinhala-700 - sinhala */
+  @font-face {
+    font-display: swap; 
+    font-family: 'Noto Sans Sinhala';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/noto-sans-sinhala-v26-sinhala-700.woff2') format('woff2'); 
+  }
+/* noto-sans-regular - cyrillic_cyrillic-ext_devanagari_greek_greek-ext_latin_latin-ext */
+@font-face {
+    font-display: swap; 
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/noto-sans-v32-cyrillic_cyrillic-ext_devanagari_greek_greek-ext_latin_latin-ext-regular.woff2') format('woff2'); 
+  }
+  /* noto-sans-700 - cyrillic_cyrillic-ext_devanagari_greek_greek-ext_latin_latin-ext */
+  @font-face {
+    font-display: swap; 
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/noto-sans-v32-cyrillic_cyrillic-ext_devanagari_greek_greek-ext_latin_latin-ext-700.woff2') format('woff2'); 
+  }
+  /* noto-serif-regular - latin */
+@font-face {
+    font-display: swap; 
+    font-family: 'Noto Serif';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/noto-serif-v23-latin-regular.woff2') format('woff2'); 
+  }
+  /* noto-serif-sc-900 - chinese-simplified */
+@font-face {
+    font-display: swap; 
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 900;
+    src: url('../fonts/noto-serif-sc-v22-chinese-simplified-900.woff2') format('woff2'); 
+  }
+
 body {
     font-family:'Noto Sans', 'Noto Sans SC', 'Noto Sans Sinhala', sans-serif;
     font-weight: normal;
