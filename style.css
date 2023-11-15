@@ -1,53 +1,57 @@
-/* noto-sans-sc-regular - chinese-simplified */
+/*====== 字体设置开始 ======*/
+
+/* noto-sans-sinhala-300 - sinhala */
 @font-face {
-    font-display: swap; 
-    font-family: 'Noto Sans SC';
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Noto Sans Sinhala';
     font-style: normal;
-    font-weight: 400;
-    src: url('noto-sans-sc-v36-chinese-simplified-regular.woff2') format('woff2'); 
+    font-weight: 300;
+    src: url('noto-sans-sinhala-v26-sinhala-300.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
   }
-  /* noto-sans-sc-700 - chinese-simplified */
-@font-face {
-    font-display: swap; 
-    font-family: 'Noto Sans SC';
+  /* noto-sans-sinhala-600 - sinhala */
+  @font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Noto Sans Sinhala';
     font-style: normal;
-    font-weight: 700;
-    src: url('noto-sans-sc-v36-chinese-simplified-700.woff2') format('woff2'); 
+    font-weight: 600;
+    src: url('noto-sans-sinhala-v26-sinhala-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
   }
 
-/* noto-sans-sinhala-regular - sinhala */
+  /* noto-sans-sc-300 - chinese-simplified */
 @font-face {
-    font-display: swap; 
-    font-family: 'Noto Sans Sinhala';
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Noto Sans SC';
     font-style: normal;
-    font-weight: 400;
-    src: url('noto-sans-sinhala-v26-sinhala-regular.woff2') format('woff2'); 
+    font-weight: 300;
+    src: url('noto-sans-sc-v36-chinese-simplified-300.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
   }
-  /* noto-sans-sinhala-700 - sinhala */
+  /* noto-sans-sc-600 - chinese-simplified */
   @font-face {
-    font-display: swap; 
-    font-family: 'Noto Sans Sinhala';
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Noto Sans SC';
     font-style: normal;
-    font-weight: 700;
-    src: url('noto-sans-sinhala-v26-sinhala-700.woff2') format('woff2'); 
+    font-weight: 600;
+    src: url('noto-sans-sc-v36-chinese-simplified-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
   }
-/* noto-sans-regular - cyrillic_cyrillic-ext_devanagari_greek_greek-ext_latin_latin-ext */
+
+/* noto-sans-300 - cyrillic_cyrillic-ext_devanagari_greek_greek-ext_latin_latin-ext_vietnamese */
 @font-face {
-    font-display: swap; 
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
     font-family: 'Noto Sans';
     font-style: normal;
-    font-weight: 400;
-    src: url('noto-sans-v32-cyrillic_cyrillic-ext_devanagari_greek_greek-ext_latin_latin-ext-regular.woff2') format('woff2'); 
+    font-weight: 300;
+    src: url('noto-sans-v32-cyrillic_cyrillic-ext_devanagari_greek_greek-ext_latin_latin-ext_vietnamese-300.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
   }
-  /* noto-sans-700 - cyrillic_cyrillic-ext_devanagari_greek_greek-ext_latin_latin-ext */
+  /* noto-sans-600 - cyrillic_cyrillic-ext_devanagari_greek_greek-ext_latin_latin-ext_vietnamese */
   @font-face {
-    font-display: swap; 
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
     font-family: 'Noto Sans';
     font-style: normal;
-    font-weight: 700;
-    src: url('noto-sans-v32-cyrillic_cyrillic-ext_devanagari_greek_greek-ext_latin_latin-ext-700.woff2') format('woff2'); 
+    font-weight: 600;
+    src: url('noto-sans-v32-cyrillic_cyrillic-ext_devanagari_greek_greek-ext_latin_latin-ext_vietnamese-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
   }
-  /* noto-serif-regular - latin */
+
+   /* noto-serif-regular - latin */
 @font-face {
     font-display: swap; 
     font-family: 'Noto Serif';
@@ -64,9 +68,11 @@
     src: url('noto-serif-sc-v22-chinese-simplified-900.woff2') format('woff2'); 
   }
 
+/*====== 字体设置结束 ======*/
+
 body {
     font-family:'Noto Sans', 'Noto Sans SC', 'Noto Sans Sinhala', sans-serif;
-    font-weight: normal;
+    font-weight: 300;
     background: white;
     overflow: hidden;
 }
@@ -113,7 +119,7 @@ h2 {
     font-size: 9pt;
     font-family:'Noto Sans', 'Noto Sans SC', 'Noto Sans Sinhala', sans-serif;
     text-align: center;
-    font-weight: 700;
+    font-weight: 600;
     position: fixed;
     display: block;
     width: 100%;
@@ -171,11 +177,11 @@ p {
     font-size: 14pt;
     color: #444;
     line-height: 1.7em;
-    font-weight: 400;
+    font-weight: 300;
 }
 
 a {
-    font-weight: 700;
+    font-weight: 600;
     color: #b97c2c;
     font-family:'Noto Sans', 'Noto Sans SC', 'Noto Sans Sinhala', sans-serif;
     transition: color 0.6s;
@@ -188,8 +194,7 @@ a:hover {
 }
 
 strong {
-    color: black;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 img {
@@ -240,7 +245,7 @@ img {
 */
 .end {
     text-align: center;
-    font-weight: bold;
+    font-weight: 600;
     color: black;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -303,7 +308,7 @@ body.dark {
     font-size: 14pt;
     color: #CCC;
     line-height: 1.7em;
-    font-weight: 400;
+    font-weight: 300;
 }
 
 .dark a {
@@ -337,45 +342,45 @@ body.dark {
 
 .classA {
     color: #C00;
-    font-weight:bold;
+    font-weight:600;
 }
 .classB {
     color: #00C;
-    font-weight:bold;
+    font-weight:600;
 }
 .classC {
     color: #0C0;
-    font-weight:bold;
+    font-weight:600;
 }
 .word {
     color: #C0C;
-    font-weight:bold;
+    font-weight:600;
 }
 .title {
     text-align:center;
-    font-weight:bold;
+    font-weight:600;
     font-size:144%;
 }
 
 .dark .title {
     text-align:center;
-    font-weight:bold;
+    font-weight:600;
     font-size:144%;
 }
 
 .dark .classA {
     color: #F33;
-    font-weight:bold;
+    font-weight:600;
 }
 .dark .classB {
     color: #33F;
-    font-weight:bold;
+    font-weight:600;
 }
 .dark .classC {
     color: #3F3;
-    font-weight:bold;
+    font-weight:600;
 }
 .dark .word {
     color: #F3F;
-    font-weight:bold;
+    font-weight:600;
 }
