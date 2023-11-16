@@ -154,16 +154,17 @@
                     }
                 }
 
-                // METARAND 
-                else if ( tag == "METARAND" ) {
-                    let result = '';
-                    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-                    let counter = 0;
-                    while (counter < 6) {
-                        result += characters.charAt(Math.floor(Math.random() * characters.length));
-                        counter += 1;
-                    }
-                    story.state.variablesState["meta_rand"] = result;
+                // METANAME
+                else if ( tag == "METANAME" ) {
+                    story.state.variablesState["meta_name"] = rand6();
+                }
+
+                // METAREF
+                else if ( tag == "METAREF" ) {
+                    let time = story.state.variablesState["meta_time"];
+                    let num = story.state.variablesState["meta_ref_num"];
+                    story.state.variablesState["meta_A"] = metaref(time, num, 0);
+                    story.state.variablesState["meta_B"] = metaref(time, num, 1);
                 }
 
                 // METAKEY
