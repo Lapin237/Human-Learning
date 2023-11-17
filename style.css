@@ -289,6 +289,7 @@ img {
 
 #controls>*:not(:last-child):after {
     content: " | ";
+    color: #cc8f1a;
 }
 
 @media screen and (max-width: 980px) {
@@ -352,7 +353,7 @@ body.dark {
 }
 
 .dark #controls {
-    background: black;
+    background: black; 
 }
 
 /*
