@@ -208,7 +208,7 @@ a {
 }
 
 a:hover {
-    color: black;
+    color: black; 
     transition: color 0.1s;
 }
 
@@ -410,4 +410,16 @@ i {
 .dark .word {
     color: #F3F;
     font-weight:600;
+}
+
+a:has(.lock) {
+    pointer-events: none;
+}
+
+.lock {
+    color: #CCC;
+}
+
+.lock .dark {
+    color: #444
 }
