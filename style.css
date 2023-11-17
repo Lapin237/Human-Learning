@@ -420,6 +420,6 @@ a:has(.lock) {
     color: #CCC;
 }
 
-.lock .dark {
+.dark .lock {
     color: #444
 }
