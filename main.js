@@ -7,8 +7,20 @@
     
     // delay = next_delay(delay)
     function next_delay(d) {
-        return 150.0 + 0.96 * d;
-
+        switch (story.state.variablesState["speed"]) {
+            case 0: 
+                return d + 333.33;
+            case 1:
+                return d + 200.0;
+            case 2:
+                return 0.96 * d + 150.0;
+            case 3: 
+                return 0.96 * d + 90.0;
+            case 4:
+                return 0;
+            default:
+                return 0.96 * d + 150.0;
+        }
     }
 
     let savedTheme;
@@ -47,6 +59,9 @@
 
     // Set initial save point
     savePoint = story.state.toJson();
+
+    // 设置标题颜色
+    set_header(story.state.variablesState["header"]);
 
     // Kick off the start of the story!
     continueStory(true);
@@ -170,6 +185,11 @@
                 // METAKEY
                 else if ( tag == "METAKEY" ) {
                     story.state.variablesState["meta_key"] = decodeURI('%E4%BD%A0%E8%B5%A2%E4%BA%86%EF%BC%81%E6%9C%89%E7%89%B9%E6%AE%8A%E6%80%A7%E8%B4%A8%E7%9A%84%E4%B8%80%E7%B1%BB%E6%98%AF%E7%94%B2%E7%B1%BB%E7%9A%84%E8%B0%9C%E9%A2%98%E6%98%AF%3Cspan%20class=%22classA%22%3E%E7%94%B2%E7%B1%BB%3C/span%3E%EF%BC%8C%E6%9C%89%E7%89%B9%E6%AE%8A%E6%80%A7%E8%B4%A8%E7%9A%84%E4%B8%80%E7%B1%BB%E6%98%AF%E4%B9%99%E7%B1%BB%E7%9A%84%E8%B0%9C%E9%A2%98%E6%98%AF%3Cspan%20class=%22classB%22%3E%E4%B9%99%E7%B1%BB%3C/span%3E%E3%80%82');
+                }
+
+                // HEADER
+                else if ( tag == "HEADER" ) {
+                    set_header(story.state.variablesState["header"]);
                 }
 
                 // CLEAR - removes all existing content.
@@ -494,6 +514,34 @@
     }
     function fromBinary(encoded) {
         return decodeURIComponent(atob(encoded));
+    }
+
+    //标题颜色
+    function set_header(color) {
+        if ( story.state.variablesState["header"] === -1 ) {
+            story.state.variablesState["header"] = 0;
+        }
+
+        let header = document.getElementById("header");
+        if (color === 0) {
+            header.classList.remove("silver");
+            header.classList.remove("gold");
+            header.classList.remove("rainbow");
+        } else if (color === 1) {
+            header.classList.add("silver");
+            header.classList.remove("gold");
+            header.classList.remove("rainbow");
+        } else if (color === 2) {
+            header.classList.remove("silver");
+            header.classList.add("gold");
+            header.classList.remove("rainbow");
+        } else if (color === 3) {
+            header.classList.remove("silver");
+            header.classList.remove("gold");
+            header.classList.add("rainbow");
+        } else if (color === -1) {
+            set_header(story.state.variablesState["header"]);
+        } 
     }
 
 })(storyContent);

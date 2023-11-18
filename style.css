@@ -91,46 +91,7 @@ body {
     font-weight: 300;
     background: white;
     overflow: hidden;
-}
-
-body.switched {
-    transition: color 0.6s, background-color 0.6s;
-}
-
-h1, h2 {
-    margin: 0;
-    padding: 0;
-}
-
-h1 {
-    font-size: 40pt;
-    margin-bottom: 10px;
-    font-family: "Noto Serif SC", serif;
-    font-weight: 900;
-    text-align: center;
-}
-
-h2 {
-    font-size: 13pt;
-    font-family: 'Noto Serif', serif;
-    font-weight: 400;
-    letter-spacing:0.35em; 
-    text-indent: 0.35em;
-    word-spacing:0.5em;
-    text-align: center;
-}
-
-.header {
-    padding-top: 3em;
-    padding-bottom: 3em;
-}
-
-/*
-  Built-in class:
-    # author: Name
-*/
-.byline {
-    font-style: italic;
+    transition: color 2.0s, background-color 2.0s;
 }
 
 .written-in-ink {
@@ -142,8 +103,8 @@ h2 {
     position: fixed;
     display: block;
     width: 100%;
-    background: white;
-    transition: color 0.6s, background 0.6s;
+    background: transparent;
+    transition: color 2.0s, background 2.0s;
     margin: 0;
     padding-top: 6px;
     padding-bottom: 6px;
@@ -185,11 +146,7 @@ h2 {
     margin: 0 auto;
     padding: 20px;
     padding-top: 4em;
-    background: white;
-}
-
-.switched .container {
-    transition: background-color 0.6s;
+    background: transparent;
 }
 
 p {
@@ -279,8 +236,7 @@ img {
     right: 14px;
     top: 4px;
     user-select: none;
-    background: white;
-    transition: color 0.6s, background 0.6s;
+    background: transparent;
 }
 
 #controls [disabled] {
@@ -312,16 +268,8 @@ body.dark {
     color: white;
 }
 
-.dark h2 {
-    color: #FFF;
-}
-
-.dark .container {
-    background: black;
-}
-
 .dark .written-in-ink {
-    background: black;
+    background: transparent;
 }
 
 .dark p {
@@ -333,7 +281,7 @@ body.dark {
 
 .dark a {
     color: #cc8f1a;
-    transition: color 0.6s;
+    transition: color 2.0s;
 }
 
 .dark a:hover {
@@ -350,10 +298,6 @@ body.dark {
 
 .dark .end {
     color: white;
-}
-
-.dark #controls {
-    background: black; 
 }
 
 /*
@@ -412,15 +356,117 @@ i {
     color: #F3F;
     font-weight:600;
 }
-
 a:has(.lock) {
     pointer-events: none;
 }
-
 .lock {
-    color: #CCC;
+    color: #888;
+}
+.dark .lock {
+    color: #888
 }
 
-.dark .lock {
-    color: #444
+
+#header {
+    position: relative;
+    margin-top: 3em;
+    margin-bottom: 3em;
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+}
+
+.big_header {
+    display: block;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    font-size: 40pt;
+    font-family: "Noto Serif SC", serif;
+    font-weight: 900;
+    text-align: center;
+}
+
+.small_header {
+    display: block;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 1rem;
+    font-size: 13pt;
+    font-family: 'Noto Serif', serif;
+    font-weight: 400;
+    letter-spacing:0.35em; 
+    text-indent: 0.35em;
+    word-spacing:0.5em;
+    text-align: center;
+}
+
+.dark .small_header {
+    color: #FFF;
+}
+
+#big_header_color {
+    z-index: 100;
+}
+
+#big_header_shadow {
+    z-index: 99;
+    position: absolute;
+    top: 0;
+    color: transparent;
+    transition: text-shadow 2.0s;
+}
+
+#big_header_color>span {
+    background: black;
+    transition: background 2.0s;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.dark #big_header_color>span {
+    background: white;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+#header.silver>#big_header_color>span {
+    background: linear-gradient(
+        135deg,
+        #999 5%,
+        #fff 20%,
+        #bbb 30%,
+        #eee 50%,
+        #bbb 70%,
+        #fff 80%,
+        #999 95%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+#header.gold>#big_header_color>span {
+    background: linear-gradient(
+        135deg, 
+        rgb(255,179,0) 10%, 
+        rgb(255,223,10) 30%, 
+        rgb(240,166,0) 50%, 
+        rgb(255,233,0) 70%, 
+        rgb(255,179,0) 90%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+#header.rainbow>#big_header_color>span {
+    background: linear-gradient(in hsl longer hue 135deg, hsl(270,100%,55%), hsl(270,100%,55%));
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+#header.silver>#big_header_shadow, 
+#header.gold>#big_header_shadow, 
+#header.rainbow>#big_header_shadow {
+    text-shadow: 
+    1px 1px 3px rgba(0,0,0,0.75);
 }
