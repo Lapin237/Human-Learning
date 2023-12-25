@@ -2,8 +2,6 @@
 
     // Create ink story from the content using inkjs
     var story = new inkjs.Story(storyContent);
-
-    var savePoint = "";
     
     // delay = next_delay(delay)
     function next_delay(d) {
@@ -23,12 +21,8 @@
         }
     }
 
-    let savedTheme;
-    let globalTagTheme;
-
     // Global tags - those at the top of the ink file
     // We support:
-    //  # theme: dark
     //  # author: Your Name
     var globalTags = story.globalTags;
     if( globalTags ) {
@@ -36,13 +30,8 @@
             var globalTag = story.globalTags[i];
             var splitTag = splitPropertyTag(globalTag);
 
-            // THEME: dark
-            if( splitTag && splitTag.property == "theme" ) {
-                globalTagTheme = splitTag.val;
-            }
-
             // author: Your Name
-            else if( splitTag && splitTag.property == "author" ) {
+            if( splitTag && splitTag.property == "author" ) {
                 var byline = document.querySelector('.byline');
                 byline.innerHTML = "by "+splitTag.val;
             }
@@ -53,12 +42,8 @@
     var outerScrollContainer = document.querySelector('.outerContainer');
 
     // page features setup
-    setupTheme(globalTagTheme);
     var hasSave = loadSavePoint();
     setupButtons(hasSave);
-
-    // Set initial save point
-    savePoint = story.state.toJson();
 
     // 设置标题颜色
     set_header(story.state.variablesState["header"]);
@@ -161,9 +146,8 @@
                 // SAVE
                 else if ( tag == "SAVE" ) {
                     try {
-                        window.localStorage.setItem('save-state', savePoint);
+                        window.localStorage.setItem('saved_file', save(story.state));
                         document.getElementById("reload").removeAttribute("disabled");
-                        window.localStorage.setItem('theme', document.body.classList.contains("dark") ? "dark" : "");
                     } catch (e) {
                         console.warn("Couldn't save state");
                     }
@@ -184,7 +168,7 @@
 
                 // METAKEY
                 else if ( tag == "METAKEY" ) {
-                    story.state.variablesState["meta_key"] = decodeURI('%E4%BD%A0%E8%B5%A2%E4%BA%86%EF%BC%81%E6%9C%89%E7%89%B9%E6%AE%8A%E6%80%A7%E8%B4%A8%E7%9A%84%E4%B8%80%E7%B1%BB%E6%98%AF%E7%94%B2%E7%B1%BB%E7%9A%84%E8%B0%9C%E9%A2%98%E6%98%AF%3Cspan%20class=%22classA%22%3E%E7%94%B2%E7%B1%BB%3C/span%3E%EF%BC%8C%E6%9C%89%E7%89%B9%E6%AE%8A%E6%80%A7%E8%B4%A8%E7%9A%84%E4%B8%80%E7%B1%BB%E6%98%AF%E4%B9%99%E7%B1%BB%E7%9A%84%E8%B0%9C%E9%A2%98%E6%98%AF%3Cspan%20class=%22classB%22%3E%E4%B9%99%E7%B1%BB%3C/span%3E%E3%80%82');
+                    story.state.variablesState["meta_key"] = meta_key;
                 }
 
                 // HEADER
@@ -248,9 +232,6 @@
                 // Tell the story where to go next
                 story.ChooseChoiceIndex(choice.index);
 
-                // This is where the save button will save from
-                savePoint = story.state.toJson();
-
                 // Aaand loop
                 continueStory();
             });
@@ -270,9 +251,6 @@
         story.ResetState();
 
         setVisible(".header", true);
-
-        // set save point to here
-        savePoint = story.state.toJson();
 
         continueStory(true);
 
@@ -367,35 +345,15 @@
     function loadSavePoint() {
 
         try {
-            let savedState = window.localStorage.getItem('save-state');
+            let savedState = window.localStorage.getItem('saved_file');
             if (savedState) {
-                story.state.LoadJson(savedState);
+                load(story.state, savedState);
                 return true;
             }
         } catch (e) {
             console.debug("Couldn't load save state");
         }
         return false;
-    }
-
-    // Detects which theme (light or dark) to use
-    function setupTheme(globalTagTheme) {
-
-        // load theme from browser memory
-        var savedTheme;
-        try {
-            savedTheme = window.localStorage.getItem('theme');
-        } catch (e) {
-            console.debug("Couldn't load saved theme");
-        }
-
-        // Check whether the OS/browser is configured for dark mode
-        var browserDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-        if (savedTheme === "dark"
-            || (savedTheme == undefined && globalTagTheme === "dark")
-            || (savedTheme == undefined && globalTagTheme == undefined && browserDark))
-            document.body.classList.add("dark");
     }
 
     // Used to hook up the functionality for global functionality buttons
@@ -416,12 +374,14 @@
                     setVisible(".header", false);
                     restart();
                     document.getElementById("reload").setAttribute("disabled", "disabled");
-                    window.localStorage.setItem('save-state', "");
+                    window.localStorage.setItem('saved_file', "");
                 }
             } else if (response == "GAUSS") {
                 story.variablesState["god_mode"] = true;
             } else if (response == "CAT") {
                 story.variablesState["count"] = 9;
+            } else if (response == "RAMANUJAN") {
+                story.variablesState["goal"] = 1;
             }
 
         });
@@ -432,14 +392,8 @@
                 alert("这里没有回头路——这命运连「保存进度」也无法回避。");
                 return;
             } 
-            try {
-                window.localStorage.setItem('save-state', savePoint);
-                document.getElementById("reload").removeAttribute("disabled");
-                window.localStorage.setItem('theme', document.body.classList.contains("dark") ? "dark" : "");
-            } catch (e) {
-                console.warn("Couldn't save state");
-            }
-
+            window.localStorage.setItem('saved_file', save(story.state));
+            document.getElementById("reload").removeAttribute("disabled");
         });
 
         let reloadEl = document.getElementById("reload");
@@ -453,32 +407,18 @@
                 alert("这里没有回头路——这命运连「加载进度」也无法逃脱。");
                 return;
             } 
-            removeAll("p");
-            removeAll("img");
-            try {
-                let savedState = window.localStorage.getItem('save-state');
-                if (savedState) story.state.LoadJson(savedState);
-            } catch (e) {
-                console.debug("Couldn't load save state");
+            let savedState = window.localStorage.getItem('saved_file');
+            if (savedState) {
+                removeAll("p");
+                removeAll("img");
+                restart();
+                load(story.state, savedState);
             }
-            continueStory(true);
-        });
-
-        let themeSwitchEl = document.getElementById("theme-switch");
-        if (themeSwitchEl) themeSwitchEl.addEventListener("click", function(event) {
-            document.body.classList.add("switched");
-            document.body.classList.toggle("dark");
         });
 
         let exportEl = document.getElementById("exportButton");
         if (exportEl) exportEl.addEventListener("click", function(event) {
-            let savedState = window.localStorage.getItem('save-state');
-            if (!savedState) {
-                alert("暂无存档，请先存储进度再导出。");
-                return;
-            }
-            let save64 = toBinary("Start_Of_Save" + savedState + "End_Of_Save");
-            navigator.clipboard.writeText(save64);    
+            navigator.clipboard.writeText(btoa("Start" + save(story.state) + "End"));    
             alert("存档已复制到剪贴板。");   
         });
 
@@ -488,32 +428,19 @@
                 alert("这里没有回头路——这命运连「导入存档」也无法赦免。");
                 return;
             } 
-
             let response = "";
             response = prompt("输入要加载的存档","");
             if (response.length <= 3) return;
-            let response_decode = fromBinary(response);
-            if (response_decode.startsWith("Start_Of_Save") && response_decode.endsWith("End_Of_Save")) {
-                let save = response_decode.slice(13, -11);
-                try {
-                    story.state.LoadJson(save);
-                } catch (e) {
-                    console.debug("Couldn't load save state");
-                }
-                continueStory(true);
+            let response_decode = atob(response);
+            if (response_decode.startsWith("Start") && response_decode.endsWith("End")) {
+                removeAll("p");
+                removeAll("img");
+                restart();
+                load(story.state, response_decode.slice(5, -3));
             } else {
                 alert("存档无效，可能不完整或已损坏。");  
             }
         });
-    }
-
-
-    // base64编码
-    function toBinary(string) {
-        return btoa(encodeURIComponent(string));
-    }
-    function fromBinary(encoded) {
-        return decodeURIComponent(atob(encoded));
     }
 
     //标题颜色
