@@ -1,5 +1,5 @@
 const stages = ["animal_vs_plant","duplicacy","field","strokes","basic_vs_gre","prime_number","same_tones","italian_vs_swedish","clock_angle","number_existence","circles","verb_vs_noun","dactyla","duplicacy_count","environmental","strokes_difference","education","prime_polynomial","third_tone","sinhala","three_hands","number_related_time","topology","grammar"];
-const utage_stages = ["repetition","parity_of_lv","black_magic","meta_puzzle","ting_pai","ting_pai_hard","dou_di_zhu"];
+const utage_stages = ["repetition","parity_of_lv","black_magic","meta_puzzle","ting_pai","ting_pai_hard","dou_di_zhu","number_with_count"];
 
 function save(state) {
     let completion = bools_to_int(stages.map( lv => state.variablesState[lv + "_win"] > 0 ));
