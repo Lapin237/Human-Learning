@@ -417,10 +417,48 @@
         });
 
         let exportEl = document.getElementById("exportButton");
-        if (exportEl) exportEl.addEventListener("click", function(event) {
-            navigator.clipboard.writeText(btoa("Start" + save(story.state) + "End"));    
-            alert("存档已复制到剪贴板。");   
-        });
+        if (exportEl) {
+            exportEl.addEventListener("click", function(event) {
+                const archiveData = "Start" + save(story.state) + "End";
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(btoa(archiveData)).then(function() {
+                        alert("存档已复制到剪贴板。");
+                    }).catch(function(error) {
+                        console.error('写入剪贴板失败:', error);
+                        displayArchiveForManualCopy(archiveData);
+                    });
+                } else {
+                    console.error('浏览器不支持剪贴板 API');
+                    displayArchiveForManualCopy(archiveData);
+                }
+            });
+        }
+
+        function displayArchiveForManualCopy(archiveData) {
+            // 创建一个文本区域元素来显示存档信息
+            const textarea = document.createElement('textarea');
+            textarea.value = archiveData;
+
+            // 将文本区域元素添加到页面中
+            document.body.appendChild(textarea);
+
+            // 选中文本
+            textarea.select();
+
+            // 尝试执行复制操作
+            try {
+                const successful = document.execCommand('copy');
+                const message = successful ? '存档已复制到剪贴板。' : ('复制存档信息失败，请手动复制：' + archiveData);
+                alert(message);
+            } catch (error) {
+                console.error('复制存档信息失败:', error);
+                alert('复制存档信息失败，请手动复制：' + archiveData);
+            }
+
+            // 从页面中移除文本区域元素
+            document.body.removeChild(textarea);
+        }
+
 
         let importEl = document.getElementById("import");
         if (importEl) importEl.addEventListener("click", function(event) {
