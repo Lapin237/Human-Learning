@@ -145,7 +145,6 @@ body {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    padding-top: 4em;
     background: transparent;
 }
 
@@ -440,7 +439,7 @@ a:has(.lock) {
         #bbb 70%,
         #fff 80%,
         #999 95%
-    );
+    )!important;
     background-clip: text;
     -webkit-background-clip: text;
 }
@@ -453,13 +452,13 @@ a:has(.lock) {
         rgb(240,166,0) 50%, 
         rgb(255,233,0) 70%, 
         rgb(255,179,0) 90%
-    );
+    )!important;
     background-clip: text;
     -webkit-background-clip: text;
 }
 
 #header.rainbow>#big_header_color>span {
-    background: linear-gradient(in hsl longer hue 135deg, hsl(270,100%,55%), hsl(270,100%,55%));
+    background: linear-gradient(in hsl longer hue 135deg, hsl(270,100%,55%), hsl(270,100%,55%))!important;
     background-clip: text;
     -webkit-background-clip: text;
 }
