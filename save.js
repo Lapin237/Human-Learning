@@ -37,7 +37,7 @@ function load(state, str) {
     state.variablesState.in_dark = final_progress != 0;
     state.variablesState.final_progress = final_progress;
     if (final_win) {
-        story.state.variablesState["meta_key"] = meta_key;
+        state.variablesState["meta_key"] = meta_key;
     }
     if (final_progress != 0) {
         document.body.classList.add("dark");

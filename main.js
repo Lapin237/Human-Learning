@@ -413,15 +413,16 @@
                 removeAll("img");
                 restart();
                 load(story.state, savedState);
+                set_header(story.state.variablesState["header"]);
             }
         });
 
         let exportEl = document.getElementById("exportButton");
         if (exportEl) {
             exportEl.addEventListener("click", function(event) {
-                const archiveData = "Start" + save(story.state) + "End";
+                const archiveData = btoa("Start" + save(story.state) + "End");
                 if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(btoa(archiveData)).then(function() {
+                    navigator.clipboard.writeText(archiveData).then(function() {
                         alert("存档已复制到剪贴板。");
                     }).catch(function(error) {
                         console.error('写入剪贴板失败:', error);
@@ -475,6 +476,7 @@
                 removeAll("img");
                 restart();
                 load(story.state, response_decode.slice(5, -3));
+                set_header(story.state.variablesState["header"]);
             } else {
                 alert("存档无效，可能不完整或已损坏。");  
             }
