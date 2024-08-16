@@ -381,14 +381,14 @@ a:has(.lock) {
 }
 
 .big_header p {
-    display: block;
     margin-top: 0em;
     margin-bottom: 0em;
     font-size: 40pt;
     font-family: "Noto Serif SC", serif;
     font-weight: 900;
     text-align: center;
-    line-height: 1.75em
+    line-height: 1.75em;
+    vertical-align: middle;
 }
 
 .small_header {
