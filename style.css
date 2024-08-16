@@ -377,6 +377,7 @@ a:has(.lock) {
     display: grid;
     justify-content: center;
     justify-items: center;
+    grid-template-rows: 50pt;
 }
 
 .big_header p {
