@@ -387,7 +387,6 @@ a:has(.lock) {
     font-family: "Noto Serif SC", serif;
     font-weight: 900;
     text-align: center;
-    line-height: 1.75em;
     vertical-align: middle;
 }
 
@@ -419,6 +418,7 @@ a:has(.lock) {
     top: 0;
     color: transparent;
     transition: text-shadow 2.0s;
+    line-height: 1.75em;
 }
 
 #big_header_color {
@@ -427,6 +427,7 @@ a:has(.lock) {
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
+    line-height: 1.75em;
 }
 
 .dark #big_header_color {
