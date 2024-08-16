@@ -399,6 +399,8 @@ a:has(.lock) {
     text-indent: 0.35em;
     word-spacing:0.5em;
     text-align: center;
+    position: absolute;
+    top: 10pt;
 }
 
 .dark .small_header {
