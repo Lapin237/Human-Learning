@@ -376,14 +376,15 @@ a:has(.lock) {
     justify-items: center;
 }
 
-.big_header {
+.big_header p {
     display: block;
-    margin-top: 0px;
-    margin-bottom: 10px;
+    margin-top: -1em;
+    margin-bottom: -0.5em;
     font-size: 40pt;
     font-family: "Noto Serif SC", serif;
     font-weight: 900;
     text-align: center;
+    line-height: 1.75em
 }
 
 .small_header {
@@ -416,7 +417,7 @@ a:has(.lock) {
     transition: text-shadow 2.0s;
 }
 
-#big_header_color>span {
+#big_header_color>p {
     background: black;
     transition: background 2.0s;
     background-clip: text;
@@ -424,13 +425,13 @@ a:has(.lock) {
     color: transparent;
 }
 
-.dark #big_header_color>span {
+.dark #big_header_color>p {
     background: white;
     background-clip: text;
     -webkit-background-clip: text;
 }
 
-#header.silver>#big_header_color>span {
+#header.silver>#big_header_color>p {
     background: linear-gradient(
         135deg,
         #999 5%,
@@ -445,7 +446,7 @@ a:has(.lock) {
     -webkit-background-clip: text;
 }
 
-#header.gold>#big_header_color>span {
+#header.gold>#big_header_color>p {
     background: linear-gradient(
         135deg, 
         rgb(255,179,0) 10%, 
@@ -458,7 +459,7 @@ a:has(.lock) {
     -webkit-background-clip: text;
 }
 
-#header.rainbow>#big_header_color>span {
+#header.rainbow>#big_header_color>p {
     background: linear-gradient(in hsl longer hue 135deg, hsl(270,100%,55%), hsl(270,100%,55%));
     background-clip: text;
     -webkit-background-clip: text;

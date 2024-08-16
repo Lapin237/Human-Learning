@@ -305,6 +305,9 @@
     function removeAll(selector)
     {
         var allElements = storyContainer.querySelectorAll(selector);
+        allElements = Array.from(allElements).filter(element => {
+            return !element.closest('.invulnerable');
+        }); // 不要删掉不该删的
         for(var i=0; i<allElements.length; i++) {
             var el = allElements[i];
             el.parentNode.removeChild(el);
